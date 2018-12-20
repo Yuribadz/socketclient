@@ -1,0 +1,19 @@
+SocketClient UI item names and explanation:
+
+mainwindow - Application Main window
+actionTCP - button under connection menu
+actionHTTP - button under connection menu
+createRadioButton - radio button on mainwindow
+updateRadioButton - radio button on mainwindow
+deleteRadioButton - radio button on mainwindow
+userNameLabel - text on mainwindow(Username)
+firstNameLabel - text on mainwindow(First Name)
+lastNameLabel - text on mainwindow(Last Name)
+phoneLabel - text on mainwindow(Phone)
+companyLabel - text on mainwindow(Company)
+userNamelineEdit - edit field near Username Label
+firstNamelineEdit - edit field near First Name Label
+lastNamelineEdit - edit field near Last Name Label
+phonelineEdit - edit field near Phone Label
+companyLineEdit - edit field near Company Label
+commitPushButton - button Commit on mainwindow
