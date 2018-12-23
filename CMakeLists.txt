@@ -28,8 +28,9 @@ target_include_directories(client
 #)
 target_sources(client
         PRIVATE
+          mainwindow.cpp
 	  src/client.cpp
-          src/mainwindow.cpp
+          src/HTTPClient.cpp
 )
 target_compile_options(client
     PUBLIC

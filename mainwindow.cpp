@@ -1,5 +1,6 @@
 #include "mainwindow.hpp"
 #include "ui_mainwindow.h"
+#include "HTTPClient.hpp"
 #include <QMessageBox>
 #include <QtDebug>
 
@@ -152,4 +153,9 @@ void MainWindow::on_commitPushButton_pressed()
             tr("Commit information"),
             tr("Commit failed. No Connection type chosen.") );
     }
+    HTTPClient client;
+    QMessageBox::information(
+        this,
+        tr("Commit information"),
+        tr(client.postRequest("test info").c_str()) );
 }
