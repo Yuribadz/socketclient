@@ -8,6 +8,7 @@ project (socketclient)
 if (UNIX)
   set(Poco_DIR "$ENV{HOME}/Projects/poco/cmake-build/Poco") 
   set(Poco_INCLUDE_DIRS "$ENV{HOME}/Projects/poco/")
+  set(FPIC_FLAG "-fPIC")
 endif (UNIX)
 set(CMAKE_AUTOMOC ON)
 # Create code from a list of Qt designer ui files
@@ -31,19 +32,14 @@ target_include_directories(client
 #)
 target_sources(client
         PRIVATE
-<<<<<<< Updated upstream
           mainwindow.cpp
 	  src/client.cpp
           src/HTTPClient.cpp
-=======
-	      src/client.cpp
-          mainwindow.cpp
->>>>>>> Stashed changes
 )
 target_compile_options(client
     PUBLIC
     -D_DEBUG
-    -fPIC
+    ${FPIC_FLAG}
 )
 target_compile_features(client
     PUBLIC

@@ -157,5 +157,5 @@ void MainWindow::on_commitPushButton_pressed()
     QMessageBox::information(
         this,
         tr("Commit information"),
-        tr(client.postRequest("test info").c_str()) );
+        tr(client.getRequest("test info").c_str()) );
 }
