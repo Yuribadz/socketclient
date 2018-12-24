@@ -1,4 +1,7 @@
 cmake_minimum_required (VERSION 3.2 FATAL_ERROR)
+IF (WIN32)
+  set(CMAKE_TOOLCHAIN_FILE "C:/Users/eyurbad/vcpkg/scripts/buildsystems/vcpkg.cmake")
+ENDIF()
 project (socketclient)
 
 # Set Poco Install directories
@@ -28,9 +31,14 @@ target_include_directories(client
 #)
 target_sources(client
         PRIVATE
+<<<<<<< Updated upstream
           mainwindow.cpp
 	  src/client.cpp
           src/HTTPClient.cpp
+=======
+	      src/client.cpp
+          mainwindow.cpp
+>>>>>>> Stashed changes
 )
 target_compile_options(client
     PUBLIC
