@@ -19,6 +19,7 @@ public:
     void setActivePropertiesTrue();
     void setActivePropertiesFalse();
 
+
 private slots:
     void on_actionExit_Program_triggered();
 

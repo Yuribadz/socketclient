@@ -31,8 +31,8 @@ public:
     HTTPClient();
     Poco::URI serverAdress;
 
-    std::string postRequest(std::string body);
-    std::string getRequest(std::string body);
+    std::string postRequest(std::string &body);
+    std::string getRequest(std::string &body);
 };
 
 #endif // HTTPCLIENT_H

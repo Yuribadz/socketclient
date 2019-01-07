@@ -119,15 +119,21 @@ void MainWindow::on_actionClose_triggered()
 void MainWindow::on_createRadioButton_toggled(bool checked)
 {
     _propertiesSingleton.createRadioButtonToggled = checked;
+    _propertiesSingleton.updateRadioButtonToggled = false;
+    _propertiesSingleton.deleteRadioButtonToggled = false;
 }
 
 void MainWindow::on_updateRadioButton_toggled(bool checked)
 {
+    _propertiesSingleton.createRadioButtonToggled = false;
     _propertiesSingleton.updateRadioButtonToggled = checked;
+    _propertiesSingleton.deleteRadioButtonToggled = false;
 }
 
 void MainWindow::on_deleteRadioButton_toggled(bool checked)
 {
+    _propertiesSingleton.createRadioButtonToggled = false;
+    _propertiesSingleton.updateRadioButtonToggled = false;
     _propertiesSingleton.deleteRadioButtonToggled = checked;
 }
 
@@ -152,10 +158,28 @@ void MainWindow::on_commitPushButton_pressed()
             this,
             tr("Commit information"),
             tr("Commit failed. No Connection type chosen.") );
+        return;
     }
-    HTTPClient client;
-    QMessageBox::information(
-        this,
-        tr("Commit information"),
-        tr(client.getRequest("test info").c_str()) );
+    std::string username = ui->userNamelineEdit->text().toStdString();
+    std::string firstName = ui->firstNamelineEdit->text().toStdString();
+    std::string lastName = ui->lastNameLabel->text().toStdString();
+    std::string phone  = ui->phonelineEdit->text().toStdString();
+    std::string company = ui->companyLineEdit->text().toStdString();
+
+    if(_propertiesSingleton.createRadioButtonToggled){
+
+    }
+    else if (_propertiesSingleton.updateRadioButtonToggled) {
+
+    }
+    else{
+
+    }
+
+//    HTTPClient client;
+//    std::string body = "body";
+//    QMessageBox::information(
+//        this,
+//        tr("Commit information"),
+//        tr(client.getRequest(body).c_str() ));
 }

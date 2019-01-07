@@ -51,17 +51,41 @@ HTTPClient::HTTPClient(): serverAdress("http://127.0.0.1:9980/")
 {
 }
 
-std::string HTTPClient::postRequest(std::string body)
-{
-    return body;
-}
-
-std::string HTTPClient::getRequest(std::string body)
+std::string HTTPClient::postRequest(std::string &body)
 {
     try{
-        std::map<std::string,std::string> headers;
-//        headers["Test-Header"] = "Rainbow Lollipop";
-        std::string  result;
+        Poco::Net::HTTPClientSession session(serverAdress.getHost(),
+                                             serverAdress.getPort());
+        std::string path(serverAdress.getPathAndQuery());
+        if (path.empty())
+        {
+            path = "/";
+        }
+        Poco::Net::HTTPRequest request(Poco::Net::HTTPRequest::HTTP_POST, path,
+                                       Poco::Net::HTTPMessage::HTTP_1_1);
+        request.setContentType("text/plain");
+        request.setContentLength(body.length());
+        std::ostream& os = session.sendRequest(request);
+        os << body; // sends the body
+        request.write(std::cout); // print out request
+        Poco::Net::HTTPResponse response;
+        std::istream &is = session.receiveResponse(response);
+        std::string responseBody = gulp(is);
+        std::cout << "======================" << "\n";
+        std::cout << responseBody << "\n";
+        std::cout << "======================" << "\n";
+        return responseBody;
+    }
+    catch (Poco::Exception &ex)
+    {
+        std::cerr << ex.displayText() << "\n";
+        return "";
+    }
+}
+
+std::string HTTPClient::getRequest(std::string &body)
+{
+    try{
         Poco::Net::HTTPClientSession session(serverAdress.getHost(),
                                              serverAdress.getPort());
         std::string path(serverAdress.getPathAndQuery());
@@ -72,12 +96,6 @@ std::string HTTPClient::getRequest(std::string body)
         Poco::Net::HTTPRequest request(Poco::Net::HTTPRequest::HTTP_GET, path,
                                        Poco::Net::HTTPMessage::HTTP_1_1);
         request.setContentType("text/plain");
-
-// Header test related
-//        for(std::map<std::string,std::string>::iterator it = headers.begin();
-//                   it != headers.end(); it++) {
-//                   request.set(it->first, it->second);
-//       }
         request.setContentLength(body.length());
         std::ostream& os = session.sendRequest(request);
         os << body; // sends the body
